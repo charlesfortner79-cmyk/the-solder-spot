@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Solder Spot — Electronics Repair, Console Mods & Refurbished Tech</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #E8650A;
+      --orange-dark: #B04D06;
+      --orange-light: #FDF0E6;
+      --bg: #ffffff;
+      --bg-secondary: #F7F7F5;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --border: rgba(0,0,0,0.1);
+      --card-bg: #ffffff;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --bg-secondary: #242424;
+        --text: #f0f0f0;
+        --text-muted: #aaaaaa;
+        --border: rgba(255,255,255,0.1);
+        --card-bg: #2a2a2a;
+        --orange-light: #3a1f08;
+      }
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    .ss-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      border-bottom: 0.5px solid var(--border);
+      background: var(--bg);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .ss-logo { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 18px; text-decoration: none; color: var(--text); }
+    .ss-logo-icon {
+      width: 34px; height: 34px; background: var(--orange);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 18px;
+    }
+    .ss-nav-links { display: flex; gap: 1.5rem; list-style: none; font-size: 14px; }
+    .ss-nav-links a { text-decoration: none; color: var(--text-muted); }
+    .ss-nav-links a:hover { color: var(--orange); }
+    .ss-nav-cta {
+      background: var(--orange); color: #fff;
+      border: none; border-radius: var(--radius-md);
+      padding: 8px 18px; font-size: 14px; font-weight: 500; cursor: pointer;
+    }
+    .ss-nav-cta:hover { background: var(--orange-dark); }
+    .ss-nav-mobile-toggle { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text); }
+
+    /* HERO */
+    .ss-hero {
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      background: var(--bg-secondary);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .ss-hero-eyebrow {
+      display: inline-block;
+      background: var(--orange-light); color: var(--orange-dark);
+      font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+      padding: 4px 14px; border-radius: 20px; margin-bottom: 1.2rem;
+    }
+    .ss-hero h1 { font-size: 48px; font-weight: 500; line-height: 1.15; margin-bottom: 1rem; }
+    .ss-hero h1 span { color: var(--orange); }
+    .ss-hero p { font-size: 17px; color: var(--text-muted); max-width: 520px; margin: 0 auto 2rem; }
+    .ss-hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .ss-btn-primary {
+      background: var(--orange); color: #fff;
+      border: none; border-radius: var(--radius-md);
+      padding: 12px 26px; font-size: 15px; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-block;
+    }
+    .ss-btn-primary:hover { background: var(--orange-dark); }
+    .ss-btn-secondary {
+      background: transparent; color: var(--text);
+      border: 0.5px solid var(--border); border-radius: var(--radius-md);
+      padding: 12px 26px; font-size: 15px; cursor: pointer; text-decoration: none; display: inline-block;
+    }
+    .ss-btn-secondary:hover { background: var(--bg-secondary); }
+
+    /* TRUST BAR */
+    .ss-trust {
+      display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+      padding: 1.25rem 2rem;
+      border-bottom: 0.5px solid var(--border);
+      font-size: 13px; color: var(--text-muted);
+    }
+    .ss-trust-item { display: flex; align-items: center; gap: 6px; }
+    .ss-trust-item i { color: var(--orange); font-size: 16px; }
+
+    /* SECTIONS */
+    .ss-section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .ss-section-full { padding: 4rem 2rem; background: var(--bg-secondary); border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+    .ss-section-full-inner { max-width: 1100px; margin: 0 auto; }
+    .ss-section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: var(--orange); text-transform: uppercase; margin-bottom: 0.4rem; }
+    .ss-section-title { font-size: 28px; font-weight: 500; margin-bottom: 0.6rem; }
+    .ss-section-sub { font-size: 15px; color: var(--text-muted); margin-bottom: 2rem; max-width: 560px; }
+
+    /* SERVICES */
+    .ss-services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .ss-service-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; }
+    .ss-service-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: var(--orange-light);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.9rem; font-size: 20px; color: var(--orange);
+    }
+    .ss-service-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+    .ss-service-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+    /* MODS */
+    .ss-mods-inner { display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap; }
+    .ss-mods-text { flex: 1; min-width: 240px; }
+    .ss-mods-list { flex: 1; min-width: 240px; display: flex; flex-direction: column; gap: 10px; }
+    .ss-mod-item {
+      background: var(--card-bg); border: 0.5px solid var(--border);
+      border-radius: 10px; padding: 0.85rem 1rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .ss-mod-item i { color: var(--orange); font-size: 18px; flex-shrink: 0; }
+    .ss-mod-item span { font-size: 14px; }
+
+    /* REFURB */
+    .ss-refurb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+    .ss-refurb-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .ss-refurb-img { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 40px; background: var(--bg-secondary); }
+    .ss-refurb-body { padding: 0.9rem; }
+    .ss-refurb-body h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+    .ss-refurb-body p { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+    .ss-refurb-badge { display: inline-block; font-size: 11px; font-weight: 500; background: #EAF3DE; color: #27500A; padding: 2px 8px; border-radius: 6px; }
+
+    /* WHY */
+    .ss-why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 2rem; }
+    .ss-why-item { text-align: center; padding: 1.25rem 1rem; background: var(--card-bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); }
+    .ss-why-num { font-size: 28px; font-weight: 500; color: var(--orange); }
+    .ss-why-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+
+    /* CONTACT */
+    .ss-contact { padding: 4rem 2rem; text-align: center; }
+    .ss-contact-card {
+      max-width: 520px; margin: 2rem auto 0;
+      background: var(--card-bg); border: 0.5px solid var(--border);
+      border-radius: 14px; padding: 2rem; text-align: left;
+    }
+    .ss-contact-row { display: flex; align-items: flex-start; gap: 12px; padding: 0.85rem 0; border-bottom: 0.5px solid var(--border); font-size: 14px; }
+    .ss-contact-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .ss-contact-row i { color: var(--orange); font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .ss-contact-row strong { display: block; margin-bottom: 2px; }
+    .ss-contact-row span { color: var(--text-muted); }
+
+    /* FOOTER */
+    .ss-footer { text-align: center; padding: 1.5rem; border-top: 0.5px solid var(--border); font-size: 13px; color: var(--text-muted); }
+    .ss-footer span { color: var(--orange); }
+
+    hr.ss-divider { border: none; border-top: 0.5px solid var(--border); }
+
+    /* MOBILE */
+    @media (max-width: 640px) {
+      .ss-nav-links, .ss-nav-cta { display: none; }
+      .ss-nav-mobile-toggle { display: block; }
+      .ss-hero h1 { font-size: 32px; }
+      .ss-section, .ss-section-full { padding: 3rem 1.25rem; }
+      .ss-trust { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="ss-nav">
+  <a class="ss-logo" href="#">
+    <div class="ss-logo-icon"><i class="ti ti-cpu" aria-hidden="true"></i></div>
+    The Solder Spot
+  </a>
+  <ul class="ss-nav-links">
+    <li><a href="#repairs">Repairs</a></li>
+    <li><a href="#mods">Console Mods</a></li>
+    <li><a href="#refurb">Shop</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="ss-nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a quote</button>
+  <button class="ss-nav-mobile-toggle" aria-label="Open menu"><i class="ti ti-menu-2"></i></button>
+</nav>
+
+<!-- HERO -->
+<section class="ss-hero">
+  <div class="ss-hero-eyebrow">⚡ Fast turnarounds · Quality repairs</div>
+  <h1>Your go-to spot for<br><span>electronics that work</span></h1>
+  <p>We fix phones, laptops, and consoles — mod your favorite retro hardware, and sell refurbished tech you can actually trust.</p>
+  <div class="ss-hero-btns">
+    <a class="ss-btn-primary" href="#contact">Book a repair</a>
+    <a class="ss-btn-secondary" href="#refurb">Browse refurbs</a>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="ss-trust">
+  <div class="ss-trust-item"><i class="ti ti-shield-check" aria-hidden="true"></i> 60-day repair warranty</div>
+  <div class="ss-trust-item"><i class="ti ti-clock" aria-hidden="true"></i> Same-day turnaround</div>
+  <div class="ss-trust-item"><i class="ti ti-tool" aria-hidden="true"></i> Free diagnostics</div>
+  <div class="ss-trust-item"><i class="ti ti-heart" aria-hidden="true"></i> Locally owned</div>
+</div>
+
+<!-- REPAIRS -->
+<section class="ss-section" id="repairs">
+  <div class="ss-section-label">Repair services</div>
+  <div class="ss-section-title">We fix what others give up on</div>
+  <div class="ss-section-sub">From cracked screens to fried motherboards — bring it in and we'll take a look, free of charge.</div>
+  <div class="ss-services-grid">
+    <div class="ss-service-card">
+      <div class="ss-service-icon"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+      <h3>Phones & tablets</h3>
+      <p>Screen replacements, battery swaps, charging ports, water damage recovery, and more.</p>
+    </div>
+    <div class="ss-service-card">
+      <div class="ss-service-icon"><i class="ti ti-device-laptop" aria-hidden="true"></i></div>
+      <h3>Laptops & computers</h3>
+      <p>Hardware upgrades, virus removal, OS reinstalls, and keyboard or display repairs.</p>
+    </div>
+    <div class="ss-service-card">
+      <div class="ss-service-icon"><i class="ti ti-device-gamepad-2" aria-hidden="true"></i></div>
+      <h3>Gaming consoles</h3>
+      <p>HDMI ports, disc drives, overheating fixes, controller repairs — PlayStation, Xbox, Nintendo.</p>
+    </div>
+    <div class="ss-service-card">
+      <div class="ss-service-icon"><i class="ti ti-circuit-board" aria-hidden="true"></i></div>
+      <h3>Component-level repair</h3>
+      <p>Microsoldering, capacitor replacement, and board-level diagnosis for tricky jobs.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="ss-divider">
+
+<!-- MODS -->
+<div class="ss-section-full" id="mods">
+  <div class="ss-section-full-inner">
+    <div class="ss-mods-inner">
+      <div class="ss-mods-text">
+        <div class="ss-section-label">Console mods</div>
+        <div class="ss-section-title">Level up your retro hardware</div>
+        <p class="ss-section-sub">We specialize in modifications that breathe new life into classic consoles — making them better than the day they shipped.</p>
+        <a class="ss-btn-primary" href="#contact">Ask about a mod</a>
+      </div>
+      <div class="ss-mods-list">
+        <div class="ss-mod-item"><i class="ti ti-antenna" aria-hidden="true"></i><span>ODE (optical drive emulator) installs</span></div>
+        <div class="ss-mod-item"><i class="ti ti-brightness-up" aria-hidden="true"></i><span>IPS & backlit screen upgrades</span></div>
+        <div class="ss-mod-item"><i class="ti ti-plug" aria-hidden="true"></i><span>USB-C charging conversions</span></div>
+        <div class="ss-mod-item"><i class="ti ti-volume" aria-hidden="true"></i><span>Audio amp & speaker upgrades</span></div>
+        <div class="ss-mod-item"><i class="ti ti-palette" aria-hidden="true"></i><span>Custom shell & button colors</span></div>
+        <div class="ss-mod-item"><i class="ti ti-question-mark" aria-hidden="true"></i><span>Don't see yours? Just ask</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REFURB -->
+<section class="ss-section" id="refurb">
+  <div class="ss-section-label">Refurbished tech</div>
+  <div class="ss-section-title">Pre-owned. Fully tested. Honestly priced.</div>
+  <div class="ss-section-sub">Every item we sell goes through our full inspection and repair process before it hits the shelf.</div>
+  <div class="ss-refurb-grid">
+    <div class="ss-refurb-card">
+      <div class="ss-refurb-img">💻</div>
+      <div class="ss-refurb-body"><h4>Laptops</h4><p>Wiped, updated, and ready to go</p><span class="ss-refurb-badge">In stock</span></div>
+    </div>
+    <div class="ss-refurb-card">
+      <div class="ss-refurb-img">📱</div>
+      <div class="ss-refurb-body"><h4>Phones</h4><p>Factory reset, fresh battery</p><span class="ss-refurb-badge">In stock</span></div>
+    </div>
+    <div class="ss-refurb-card">
+      <div class="ss-refurb-img">🎮</div>
+      <div class="ss-refurb-body"><h4>Consoles</h4><p>Cleaned, tested, often modded</p><span class="ss-refurb-badge">In stock</span></div>
+    </div>
+    <div class="ss-refurb-card">
+      <div class="ss-refurb-img">🖥️</div>
+      <div class="ss-refurb-body"><h4>Desktops</h4><p>Upgraded parts, proven builds</p><span class="ss-refurb-badge">In stock</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="ss-divider">
+
+<!-- WHY US -->
+<div class="ss-section-full">
+  <div class="ss-section-full-inner" style="text-align:center;">
+    <div class="ss-section-label">Why us</div>
+    <div class="ss-section-title">A repair shop you can trust</div>
+    <div class="ss-why-grid">
+      <div class="ss-why-item">
+        <div class="ss-why-num">60 days</div>
+        <div class="ss-why-label">Warranty on every repair we do</div>
+      </div>
+      <div class="ss-why-item">
+        <div class="ss-why-num">Free</div>
+        <div class="ss-why-label">Diagnostics on every device we see</div>
+      </div>
+      <div class="ss-why-item">
+        <div class="ss-why-num">Same day</div>
+        <div class="ss-why-label">Turnaround on most repairs once received</div>
+      </div>
+      <div class="ss-why-item">
+        <div class="ss-why-num">Honest</div>
+        <div class="ss-why-label">We'll tell you if it's not worth fixing</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="ss-contact" id="contact">
+  <div class="ss-section-label">Contact</div>
+  <div class="ss-section-title">Come find us</div>
+  <p style="color:var(--text-muted);font-size:15px;max-width:460px;margin:0 auto;">Drop in, call ahead, or send us a message — we're happy to answer questions before you commit to anything.</p>
+  <div class="ss-contact-card">
+    <div class="ss-contact-row">
+      <i class="ti ti-map-pin" aria-hidden="true"></i>
+      <div><strong>Address</strong><span>Coming soon</span></div>
+    </div>
+    <div class="ss-contact-row">
+      <i class="ti ti-phone" aria-hidden="true"></i>
+      <div><strong>Phone</strong><span>Coming soon</span></div>
+    </div>
+    <div class="ss-contact-row">
+      <i class="ti ti-clock" aria-hidden="true"></i>
+      <div><strong>Hours</strong><span>Coming soon</span></div>
+    </div>
+    <div class="ss-contact-row">
+      <i class="ti ti-mail" aria-hidden="true"></i>
+      <div><strong>Email</strong><span>Coming soon</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ss-footer">
+  © 2026 <span>The Solder Spot</span> · Built with care for the community
+</footer>
+
+</body>
+</html>
